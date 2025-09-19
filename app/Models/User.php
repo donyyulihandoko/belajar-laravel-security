@@ -50,4 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contact::class, 'user_id', 'id',);
     }
+
+    // function relation one to many to Todo model
+    public function todos(): HasMany
+    {
+        return $this->hasMany(Todo::class, 'user_id', 'id');
+    }
 }
