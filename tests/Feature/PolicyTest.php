@@ -42,4 +42,17 @@ class PolicyTest extends TestCase
         self::assertTrue($user->can('create', Todo::class));
         self::assertTrue($user->can('update', $todo));
     }
+
+    public function testFunctionBefore()
+    {
+        $this->seed([UserSeeder::class, TodoSeeder::class]);
+        $user = User::query()->where('name', 'superadmin')->firstOrFail();
+        $todo = Todo::query()->first();
+        self::assertTrue($user->can('view', $todo));
+        self::assertTrue($user->can('viewAny', $todo));
+        self::assertTrue($user->can('delete', $todo));
+        self::assertTrue($user->can('forceDelete', $todo));
+        self::assertTrue($user->can('create', Todo::class));
+        self::assertTrue($user->can('update', $todo));
+    }
 }
